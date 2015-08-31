@@ -3,18 +3,18 @@
 #define CLASS_NAME CstrSlice
 #include "class_codegen.hpp"
 
-CTOR(char* str, int len) {
+CTOR(char* cstr, int len) {
   pos = len;
-  mem = str;
+  slice = cstr;
     
-  erasedChar = str[len];
-  mem[len] = '\0';
+  erasedChar = cstr[len];
+  slice[len] = '\0';
 }
 
 DTOR() {
-  mem[pos] = erasedChar;
+  slice[pos] = erasedChar;
 }
 
-DEFN(char*, operator char*()) const {
-  return mem;
+DEFN(, operator char*()) const {
+  return slice;
 }

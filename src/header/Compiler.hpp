@@ -1,6 +1,8 @@
 #ifndef COMPILER_
 #define COMPILER_
 
+#include <string.h>
+
 #include "PtrWalker.hpp"
 
 class Compiler {
@@ -8,13 +10,13 @@ private:
   static char* input;
   static PtrWalker<char>* output;
 
-  void parse();
-  void parseNum();
-  void parseStr();
-  void parseVec();
+  static void parse();
+  static void parseNum();
+  static void parseStr();
+  static void parseVec();
   
 public:
-  static PtrWalker<char>* toByteCode(char* input);
+  static PtrWalker<char>* toByteCode(char* input, size_t len);
 };
 
 #endif

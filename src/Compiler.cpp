@@ -6,20 +6,18 @@
 #define CLASS_NAME Compiler
 #include "util/class_codegen.hpp"
 
-// NUM: 4 byte encoded int32_t
-// STR: 4 byte length, N bytes - str contents
-// VEC: 4 byte length, N pointers to code
+#include "util/CstrRange.hpp"
+#include "util/CstrSlice.hpp"
+#include "header/TypeConv.hpp"
+#include "header/ByteCode.hpp"
+
+char* CLASS_NAME::input;
+PtrWalker<char>* CLASS_NAME::output;
 
 DEFN(void, parseNum()) {
-  const char* slice = input;
-
-  while (isdigit(*++input)) {
-  }
-
-  char tmp = *input;
-  *input = '\0';
-  output.insert(slice, 4);
-  *input = tmp;
+  CstrRange::ofDigits(input);
+  CstrSlice slice(CstrRange::low, CstrRange::dist());
+  ByteCode::appendIntBytes(output, static_cast<char*>(slice));
 }
 
 DEFN(void, parse()) {
@@ -36,10 +34,12 @@ DEFN(void, parse()) {
   }
 }
 
-DEFN(char*, toByteCode(char* text, size_t len)) {
+DEFN(PtrWalker<char>*, toByteCode(char* text, size_t len)) {
   output = new PtrWalker<char>(len + len);
 
-  for (input = text; *input; ++input) {
+  for (input = text; *input; ++input)
     parse();
-  }
+
+  output->rewind();
+  return output;
 }

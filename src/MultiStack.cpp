@@ -1,6 +1,6 @@
 #include "header/MultiStack.hpp"
 
-#include "header/typeconv.hpp"
+#include "header/TypeConv.hpp"
 
 #define CLASS_NAME MultiStack
 #include "util/class_codegen.hpp"
@@ -28,7 +28,7 @@ DEFN(void, push(char* v)) {
   
 DEFN(char*, popStr()) {
   switch (types.bval()) {
-  case 'i': return toStr(ints.pop());
+  case 'i': return TypeConv::toCstr(ints.pop());
   case 's': return strings.pop();
   // Should never happend
   default: throw new int(0);

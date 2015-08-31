@@ -11,7 +11,7 @@ public:
   CstrSlice(char* cstr, int len);
 
   // Restore corrupted string
-  ~StrSlice();
+  ~CstrSlice();
 
   operator char*() const;
 };

@@ -1,14 +1,18 @@
 ## Compilation settings
 CC=g++
-CFLAGS=-std=c++11 -Wall -fno-implicit-templates
+CFLAGS=-std=c++14 -Wall -fno-implicit-templates
 BIN=bin/interpreter
 
 ## Sources
-SRC=src/typeconv.cpp \
+SRC=src/util/CstrSlice.cpp \
+    src/util/CstrRange.cpp \
+    src/TypeConv.cpp \
+    src/ByteCode.cpp \
     src/PtrWalker.cpp \
     src/RecurPtrWalker.cpp \
     src/Stack.cpp \
     src/MultiStack.cpp \
+    src/Compiler.cpp \
     src/Evaluator.cpp \
     main.cpp
 

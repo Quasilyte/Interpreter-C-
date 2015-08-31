@@ -101,6 +101,11 @@ DEFN(void, insert(T* value, int n)) {
   memcpy(p, value, n); 
 }
 
+DEFN(void, insertf(T* value, int n)) {
+  insert(value, n);
+  move(n - 1);
+}
+
 DEFN(void, operator++()) {
   ++p;
 }

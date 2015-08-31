@@ -1,6 +1,8 @@
 #ifndef BYTE_CODE_
 #define BYTE_CODE_
 
+#include "PtrWalker.hpp"
+
 namespace ByteCode {
   // `ABORT' should always be 0,
   // actual value of others does not matter at all
@@ -15,6 +17,8 @@ namespace ByteCode {
     BIN_OP_ADD,
     BIN_OP_SUB
   };
+
+  void appendIntBytes(PtrWalker<char>* dest, char* cstr);
 };
 
 #endif

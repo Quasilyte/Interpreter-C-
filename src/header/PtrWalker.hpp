@@ -58,7 +58,10 @@ public:
   void fset(T value);
   void setb(T value);
   void bset(T value);
+
+  // Batch insertion
   void insert(T* value, int n);
+  void insertf(T* value, int n);
 
   // Move `p' back and forth
   void operator++();
