@@ -39,8 +39,8 @@ public:
   // Increase buffer capacity by `cap * 2 - 1'
   void enlarge(const int offset);
 
-  // If returns true, then it is UB to move further
   bool atEnd() const;
+  bool canMove() const;
 
   T* begin() const;
   T* head() const;

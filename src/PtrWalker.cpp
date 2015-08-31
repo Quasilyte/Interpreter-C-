@@ -5,8 +5,8 @@
 
 #define TMPL_ARGS class T
 #define TMPL_TYPENAMES T
-#define TMPL_CLASS_NAME PtrWalker
-#include "tmpl.hpp"
+#define CLASS_NAME PtrWalker
+#include "util/class_codegen.hpp"
 
 CTOR(T* initializer, int initializerSize) {
   this->cap = initializerSize;
@@ -27,91 +27,95 @@ DTOR() {
     free(mem);
 }
 
-TMPL(void, rewind()) {
+DEFN(void, rewind()) {
   p = mem;
 }
 
-TMPL(int, pos()) const {
+DEFN(int, pos()) const {
   return p - mem;
 }
 
-TMPL(void, enlarge(const int offset)) {
+DEFN(void, enlarge(const int offset)) {
   cap += cap - 1;
   mem = (T*) realloc(mem, cap * sizeof(T));
   p = mem + offset;
 }
 
-TMPL(bool, atEnd()) const {
+DEFN(bool, atEnd()) const {
   return pos() == cap;
 }
 
-TMPL(T*, begin()) const {
+DEFN(bool, canMove()) const {
+  return pos() < cap;
+}
+
+DEFN(T*, begin()) const {
   return mem;
 }
 
-TMPL(T*, head()) const {
+DEFN(T*, head()) const {
   return p;
 }
 
-TMPL(T, val()) const {
+DEFN(T, val()) const {
   return *p;
 }
 
-TMPL(T, valf()) {
+DEFN(T, valf()) {
   return *p++;
 }
 
-TMPL(T, fval()) {
+DEFN(T, fval()) {
   return *++p;
 }
 
-TMPL(T, valb()) {
+DEFN(T, valb()) {
   return *p--;
 }
 
-TMPL(T, bval()) {
+DEFN(T, bval()) {
   return *--p;
 }
 
-TMPL(void, set(T value)) {
+DEFN(void, set(T value)) {
   *p = value;
 }
 
-TMPL(void, setf(T value)) {
+DEFN(void, setf(T value)) {
   *p++ = value;
 }
 
-TMPL(void, fset(T value)) {
+DEFN(void, fset(T value)) {
   *++p = value;
 }
 
-TMPL(void, setb(T value)) {
+DEFN(void, setb(T value)) {
   *p-- = value;
 }
 
-TMPL(void, bset(T value)) {
+DEFN(void, bset(T value)) {
   *--p = value;
 }
 
-TMPL(void, insert(T* value, int n)) {
+DEFN(void, insert(T* value, int n)) {
   memcpy(p, value, n); 
 }
 
-TMPL(void, operator++()) {
+DEFN(void, operator++()) {
   ++p;
 }
 
-TMPL(void, operator--()) {
+DEFN(void, operator--()) {
   --p;
 }
 
-TMPL(void, move(int distance)) {
+DEFN(void, move(int distance)) {
   p += distance;
 }
 
-INST(char);
-INST(int);
-INST(double);
+PERMIT(char);
+PERMIT(int);
+PERMIT(double);
 
 // Instances below are only for RecurPtrWalker
-INST(char*); 
+PERMIT(char*); 

@@ -2,28 +2,31 @@
 
 #include "typeconv.hpp"
 
-MultiStack::MultiStack(int initialCap):
+#define CLASS_NAME MultiStack
+#include "util/class_codegen.hpp"
+
+CTOR(int initialCap):
   types(initialCap * 2),
   ints(initialCap),
   doubles(initialCap),
   strings(initialCap) {}
 
-void MultiStack::push(int v) {
+DEFN(void, push(int v)) {
   types.setf('i');
   ints.push(v);
 }
 
-void MultiStack::push(double v) {
+DEFN(void, push(double v)) {
   types.setf('d');
   doubles.push(v);
 }
   
-void MultiStack::push(char* v) {
+DEFN(void, push(char* v)) {
   types.setf('s');
   strings.push(v);
 }
   
-char* MultiStack::popStr() {
+DEFN(char*, popStr()) {
   switch (types.bval()) {
   case 'i': return toStr(ints.pop());
   case 's': return strings.pop();

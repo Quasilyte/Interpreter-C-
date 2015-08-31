@@ -4,8 +4,8 @@
 
 #define TMPL_ARGS class T
 #define TMPL_TYPENAMES T
-#define TMPL_CLASS_NAME RecurPtrWalker
-#include "tmpl.hpp"
+#define CLASS_NAME RecurPtrWalker
+#include "util/class_codegen.hpp"
 
 // We need to use `this' to perform two-phase name lookup.
 // In other words, removing `this' will break the compilation.
@@ -20,4 +20,4 @@ DTOR() {
   }
 }
 
-INST(char*);
+PERMIT(char*);

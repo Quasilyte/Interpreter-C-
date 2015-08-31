@@ -3,12 +3,14 @@
 #include <ctype.h>
 #include <string.h>
 
+#define CLASS_NAME Compiler
+#include "util/class_codegen.hpp"
+
 // NUM: 4 byte encoded int32_t
 // STR: 4 byte length, N bytes - str contents
 // VEC: 4 byte length, N pointers to code
 
-
-void Compiler::parseNum() {
+DEFN(void, parseNum()) {
   const char* slice = input;
 
   while (isdigit(*++input)) {
@@ -20,7 +22,7 @@ void Compiler::parseNum() {
   *input = tmp;
 }
 
-void Compiler::parse() {
+DEFN(void, parse()) {
   char c = *input;
   
   if (isdigit(c) || c == '-') {
@@ -34,7 +36,7 @@ void Compiler::parse() {
   }
 }
 
-char* Compiler::toByteCode(char* text, size_t len) {
+DEFN(char*, toByteCode(char* text, size_t len)) {
   output = new PtrWalker<char>(len + len);
 
   for (input = text; *input; ++input) {
