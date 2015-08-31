@@ -6,6 +6,8 @@ BIN=bin/interpreter
 ## Sources
 SRC=src/util/CstrSlice.cpp \
     src/util/CstrRange.cpp \
+    src/Scanner.cpp \
+    src/Messenger.cpp \
     src/TypeConv.cpp \
     src/ByteCode.cpp \
     src/PtrWalker.cpp \

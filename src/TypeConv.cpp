@@ -5,7 +5,7 @@
 
 namespace TypeConv {
   int32_t toInt(char* v) {
-    return atol(v);
+    return atoi(v);
   }
 
   char* toCstr(int32_t v) {

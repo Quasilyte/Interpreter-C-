@@ -12,14 +12,36 @@
 #include "util/CstrSlice.hpp"
 #include "header/TypeConv.hpp"
 #include "header/ByteCode.hpp"
+#include "header/Scanner.hpp"
 
 char* CLASS_NAME::input;
 PtrWalker<unsigned char>* CLASS_NAME::output;
 
+// "-4354.5"
+// "455"
+// "355.6"
+
 DEFN(void, parseNum()) {
+  char *numBegin = input;
+
+  while (isdigit(*++input));
+  char c = *input; // Trailing char
+
+  if (c == '.') { // Double
+    printf("cant handle doubles\n");
+    exit(0);
+  } else if (Scanner::validDelim(c) || (c == 0 && input - numBegin > 1)) {
+    ByteCode::appendIntBytes(output, numBegin);
+  } else {
+    printf("malformed num!\n");
+    exit(0);
+  }
+
+  /*
   CstrRange::ofDigits(&input);
   CstrSlice slice(CstrRange::low, CstrRange::dist());
   ByteCode::appendIntBytes(output, static_cast<char*>(slice));
+  */
 }
 
 DEFN(void, parse()) {
@@ -52,11 +74,12 @@ DEFN(void, parse()) {
 }
 
 DEFN(PtrWalker<unsigned char>*, toByteCode(char* text, size_t len)) {
-  output = new PtrWalker<unsigned char>(len + len);
+  output = new PtrWalker<unsigned char>(len + len + len);
   input = text;
   
-  while(*input)
+  while(*input) {
     parse();
+  }
 
   output->rewind();
   return output;
