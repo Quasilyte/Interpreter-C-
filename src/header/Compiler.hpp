@@ -1,5 +1,5 @@
-#ifndef COMPILER_
-#define COMPILER_
+#ifndef HEADER_COMPILER_
+#define HEADER_COMPILER_
 
 #include <string.h>
 
@@ -8,7 +8,7 @@
 class Compiler {
 private:
   static char* input;
-  static PtrWalker<char>* output;
+  static PtrWalker<unsigned char>* output;
 
   static void parse();
   static void parseNum();
@@ -16,7 +16,7 @@ private:
   static void parseVec();
   
 public:
-  static PtrWalker<char>* toByteCode(char* input, size_t len);
+  static PtrWalker<unsigned char>* toByteCode(char* input, size_t len);
 };
 
 #endif

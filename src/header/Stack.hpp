@@ -1,5 +1,5 @@
-#ifndef STACK_
-#define STACK_
+#ifndef HEADER_STACK_
+#define HEADER_STACK_
 
 template <class T, class Ptr> class Stack {
 private:

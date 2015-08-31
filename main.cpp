@@ -14,8 +14,9 @@
 #include <ctype.h>
 
 int main() {
+  
   char* str = (char*) malloc(40);
-  strcpy(str, "35948");
+  strcpy(str, "399 301");
 
   Evaluator ev;
   ev.eval(str, strlen(str));

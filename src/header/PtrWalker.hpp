@@ -1,5 +1,5 @@
-#ifndef PTR_WALKER_
-#define PTR_WALKER_
+#ifndef HEADER_PTR_WALKER_
+#define HEADER_PTR_WALKER_
 
 /**
  * Description:
@@ -40,7 +40,8 @@ public:
   void enlarge(const int offset);
 
   bool atEnd() const;
-  bool canMove() const;
+  bool canMovef() const;
+  bool canMoveb() const;
 
   T* begin() const;
   T* head() const;

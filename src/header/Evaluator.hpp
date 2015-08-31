@@ -1,16 +1,22 @@
-#ifndef EVALUATOR_
-#define EVALUATOR_
+#ifndef HEADER_EVALUATOR_
+#define HEADER_EVALUATOR_
 
 #include <string.h>
 
 #include "PtrWalker.hpp"
+#include "MultiStack.hpp"
+#include "ByteCode.hpp"
 
 class Evaluator {
 private:
-  PtrWalker<char>* byteCode;
+  static PtrWalker<unsigned char>* byteCode;;
+
+  static void die();
+  static void BC_STOP();
+  static void BC_INT();
   
 public:
-  void eval(char* input, size_t len);
+  static void eval(char* input, size_t len);
 };
 
 #endif

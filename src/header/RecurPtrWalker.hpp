@@ -1,5 +1,5 @@
-#ifndef RECUR_PTR_WALKER_
-#define RECUR_PTR_WALKER_
+#ifndef HEADER_RECUR_PTR_WALKER_
+#define HEADER_RECUR_PTR_WALKER_
 
 #include "PtrWalker.hpp"
 

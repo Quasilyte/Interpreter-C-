@@ -1,15 +1,15 @@
 #include "header/MultiStack.hpp"
 
+#include "header/config/runtime.hpp"
 #include "header/TypeConv.hpp"
 
 #define CLASS_NAME MultiStack
 #include "util/class_codegen.hpp"
 
-CTOR(int initialCap):
-  types(initialCap * 2),
-  ints(initialCap),
-  doubles(initialCap),
-  strings(initialCap) {}
+PtrWalker<char> CLASS_NAME::types(DATA_STACK_SIZE * 2);
+Stack<int, PtrWalker<int>> CLASS_NAME::ints(DATA_STACK_SIZE);
+Stack<double, PtrWalker<double>> CLASS_NAME::doubles(DATA_STACK_SIZE);
+Stack<char*, RecurPtrWalker<char*>> CLASS_NAME::strings(DATA_STACK_SIZE);
 
 DEFN(void, push(int v)) {
   types.setf('i');

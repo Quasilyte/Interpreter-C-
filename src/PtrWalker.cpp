@@ -2,6 +2,7 @@
 
 #include <stdlib.h>
 #include <string.h>
+#include <stdio.h>
 
 #define TMPL_ARGS class T
 #define TMPL_TYPENAMES T
@@ -45,8 +46,12 @@ DEFN(bool, atEnd()) const {
   return pos() == cap;
 }
 
-DEFN(bool, canMove()) const {
+DEFN(bool, canMovef()) const {
   return pos() < cap;
+}
+
+DEFN(bool, canMoveb()) const {
+  return pos() > -1;
 }
 
 DEFN(T*, begin()) const {
@@ -103,7 +108,7 @@ DEFN(void, insert(T* value, int n)) {
 
 DEFN(void, insertf(T* value, int n)) {
   insert(value, n);
-  move(n - 1);
+  move(n);
 }
 
 DEFN(void, operator++()) {
@@ -118,6 +123,7 @@ DEFN(void, move(int distance)) {
   p += distance;
 }
 
+PERMIT(unsigned char);
 PERMIT(char);
 PERMIT(int);
 PERMIT(double);

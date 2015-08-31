@@ -1,6 +1,7 @@
 #include "header/TypeConv.hpp"
 
 #include <stdlib.h>
+#include <stdio.h>
 
 namespace TypeConv {
   int32_t toInt(char* v) {
@@ -35,21 +36,21 @@ namespace TypeConv {
     return s;
   }
 
-  int32_t intBytesToInt(char* v) {
+  int32_t intBytesToInt(unsigned char* v) {
     return static_cast<int32_t>(
       v[3] | (v[2] << 8) | (v[1] << 16) | (v[0] << 24)
     );
   }
 
-  char* cstrToIntBytes(char* s) {
+  unsigned char* cstrToIntBytes(char* s) {
     int32_t v = toInt(s);
-
-    char *bytes = (char*) malloc(4);
+    unsigned char* bytes = (unsigned char*) malloc(4);
+        
     bytes[0] = (v >> 24) & 0xFF;
     bytes[1] = (v >> 16) & 0xFF;
     bytes[2] = (v >> 8) & 0xFF;
     bytes[3] = v & 0xFF;
-
+    
     return bytes;
   }
 }

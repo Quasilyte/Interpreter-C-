@@ -1,24 +1,39 @@
-#ifndef BYTE_CODE_
-#define BYTE_CODE_
+#ifndef HEADER_BYTE_CODE_
+#define HEADER_BYTE_CODE_
 
 #include "PtrWalker.hpp"
 
+/**
+ * Actual identifiers does not matter much,
+ * the only thing we need here is to ensure each
+ * byte code has the handler with the same name attached.
+ * So, the code should not ever "know" what real names are,
+ * that is why we mangle names with underscores
+ */
+// Stop code should ALWAYS be 0
+#define BC_STOP bcodeStop__
+// Scalar
+#define BC_INT bcodeInt__
+#define BC_DOUBLE bcodeDouble__
+#define BC_STR bcodeStr__
+#define BC_VEC bcodeVec__
+// Binary Operators
+#define BC_ADD bcodeAdd__
+#define BC_SUB bcodeSub__
+
 namespace ByteCode {
-  // `ABORT' should always be 0,
-  // actual value of others does not matter at all
   enum {
-    ABORT = '\0',
-    // Scalars
-    T_INT,
-    T_DOUBLE,
-    T_STR,
-    T_VEC,
-    // Binary operators
-    BIN_OP_ADD,
-    BIN_OP_SUB
+    BC_STOP = '\0', // Again, STOP must ALWAYS be 0
+    // The order of others not matters
+    BC_INT,
+    BC_DOUBLE,
+    BC_STR,
+    BC_VEC,
+    BC_ADD,
+    BC_SUB
   };
 
-  void appendIntBytes(PtrWalker<char>* dest, char* cstr);
-};
+  void appendIntBytes(PtrWalker<unsigned char>* dest, char* cstr);
+}
 
 #endif

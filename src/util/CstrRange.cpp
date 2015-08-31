@@ -5,18 +5,22 @@
 #define CLASS_NAME CstrRange
 #include "class_codegen.hpp"
 
-// Declare static members
+// Declare class static members
 char* CLASS_NAME::low;
 char* CLASS_NAME::high;
 
-DEFN(void, load(char* cstr)) {
-  low = high = cstr;
+// To avoid both code duplication and inderect calls
+#define MOVE(cstr, ...)				\
+  load(cstr);					\
+  __VA_ARGS__;					\
+  *cstr = high; 
+
+DEFN(void, load(char** cstr)) {
+  low = high = *cstr;
 }
 
-DEFN(void, ofDigits(char* cstr)) {
-  load(cstr);
-  
-  while (isdigit(*++high));
+DEFN(void, ofDigits(char** cstr)) {
+  MOVE(cstr, while (isdigit(*++high)));
 }
 
 DEFN(int, dist()) {

@@ -9,8 +9,8 @@ namespace TypeConv {
   int32_t toInt(char* v);
   char* toCstr(int32_t v);
 
-  int32_t intBytesToInt(char* v);
-  char* cstrToIntBytes(char* s);
+  int32_t intBytesToInt(unsigned char* v);
+  unsigned char* cstrToIntBytes(char* s);
 }
 
 #endif

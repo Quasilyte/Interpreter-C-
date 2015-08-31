@@ -2,6 +2,8 @@
 
 #include <ctype.h>
 #include <string.h>
+#include <stdlib.h>
+#include <stdio.h>
 
 #define CLASS_NAME Compiler
 #include "util/class_codegen.hpp"
@@ -12,10 +14,10 @@
 #include "header/ByteCode.hpp"
 
 char* CLASS_NAME::input;
-PtrWalker<char>* CLASS_NAME::output;
+PtrWalker<unsigned char>* CLASS_NAME::output;
 
 DEFN(void, parseNum()) {
-  CstrRange::ofDigits(input);
+  CstrRange::ofDigits(&input);
   CstrSlice slice(CstrRange::low, CstrRange::dist());
   ByteCode::appendIntBytes(output, static_cast<char*>(slice));
 }
@@ -30,12 +32,15 @@ DEFN(void, parse()) {
   } else if (c == '\'') {
     // parseStr();
   } else {
+    char *s = (char*) malloc(4); strcpy(s, "111");
+    ByteCode::appendIntBytes(output, s);
+    
     // parseSym();
   }
 }
 
-DEFN(PtrWalker<char>*, toByteCode(char* text, size_t len)) {
-  output = new PtrWalker<char>(len + len);
+DEFN(PtrWalker<unsigned char>*, toByteCode(char* text, size_t len)) {
+  output = new PtrWalker<unsigned char>(len + len);
 
   for (input = text; *input; ++input)
     parse();
