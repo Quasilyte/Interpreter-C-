@@ -3,32 +3,31 @@
 #include "PtrWalker.hpp"
 #include "RecurPtrWalker.hpp"
 
-template <class T, class Ptr> 
-Stack<T, Ptr>::Stack(int initialCap):
-  elems(initialCap) {}
+#define TMPL_ARGS class T, class Ptr
+#define TMPL_TYPENAMES T, Ptr
+#define TMPL_CLASS_NAME Stack
+#include "tmpl.hpp"
 
-template <class T, class Ptr> 
-T Stack<T, Ptr>::top() const {
+CTOR(int initialCap): elems(initialCap) {}
+
+TMPL(T, top()) const {
   return elems.val();
 }
 
-template <class T, class Ptr> 
-T Stack<T, Ptr>::pop() {
+TMPL(T, pop()) {
   return elems.bval();
 }
 
-template <class T, class Ptr> 
-void Stack<T, Ptr>::push(T value) {
-  ensureCap(); elems.setf(value);
+TMPL(void, push(T value)) {
+  ensureCap();
+  elems.setf(value);
 }
 
-template <class T, class Ptr> 
-void Stack<T, Ptr>::ensureCap() {
-  if (elems.atEnd()) {
+TMPL(void, ensureCap()) {
+  if (elems.atEnd()) 
     elems.enlarge(elems.pos());
-  }
 }
 
-template class Stack<int, PtrWalker<int>>;
-template class Stack<double, PtrWalker<double>>;
-template class Stack<char*, RecurPtrWalker<char*>>;
+INST(int, PtrWalker<int>);
+INST(double, PtrWalker<double>);
+INST(char*,  RecurPtrWalker<char*>);

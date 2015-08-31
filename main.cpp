@@ -11,9 +11,9 @@
 #include <stdint.h>
 
 int main() {
-  //Evaluator evaluator;
-  //char s[] = {'a', 'b', 1, 0, 0, 0, 6, 'z', 'v'};
-  //evaluator.eval(s, 9);
+  Evaluator evaluator;
+  char s[] = {'a', 'b', 1, 0, 0, 0, 6, 'z', 'v'};
+  evaluator.eval(s, 8);
   
   return 0;
 }

@@ -1,130 +1,117 @@
 #include "PtrWalker.hpp"
 
 #include <stdlib.h>
+#include <string.h>
 
-template <class T>
-PtrWalker<T>::PtrWalker(T* initializer, int initializerSize) {
+#define TMPL_ARGS class T
+#define TMPL_TYPENAMES T
+#define TMPL_CLASS_NAME PtrWalker
+#include "tmpl.hpp"
+
+CTOR(T* initializer, int initializerSize) {
   this->cap = initializerSize;
 
-  begin = initializer;
-  head = begin;
+  mem = initializer;
+  p = mem;
 }
 
-template <class T>
-PtrWalker<T>::PtrWalker(const int initialCap) {
+CTOR(const int initialCap) {
   cap = initialCap;
 
-  begin = (T*) calloc(initialCap, sizeof(T));
-  head = begin;
+  mem = (T*) calloc(initialCap, sizeof(T));
+  p = mem;
 }
 
-template <class T>
-PtrWalker<T>::~PtrWalker() {
-  if (begin) {
-    free(begin);
-  }
+DTOR() {
+  if (mem) 
+    free(mem);
 }
 
-template <class T>
-void PtrWalker<T>::rewind() {
-  head = begin;
+TMPL(void, rewind()) {
+  p = mem;
 }
 
-template <class T>
-int PtrWalker<T>::pos() const {
-  return head - begin;
+TMPL(int, pos()) const {
+  return p - mem;
 }
 
-template <class T>
-void PtrWalker<T>::enlarge(const int offset) {
+TMPL(void, enlarge(const int offset)) {
   cap += cap - 1;
-  begin = (T*) realloc(begin, cap * sizeof(T));
-  head = begin + offset;
+  mem = (T*) realloc(mem, cap * sizeof(T));
+  p = mem + offset;
 }
 
-template <class T>
-bool PtrWalker<T>::atEnd() const {
+TMPL(bool, atEnd()) const {
   return pos() == cap;
 }
 
-template <class T>
-T* PtrWalker<T>::getBegin() const {
-  return begin;
+TMPL(T*, begin()) const {
+  return mem;
 }
 
-template <class T>
-T* PtrWalker<T>::getHead() const {
-  return head;
+TMPL(T*, head()) const {
+  return p;
 }
 
-template <class T>
-T PtrWalker<T>::val() const {
-  return *head;
+TMPL(T, val()) const {
+  return *p;
 }
 
-template <class T>
-T PtrWalker<T>::valf() {
-  return *head++;
+TMPL(T, valf()) {
+  return *p++;
 }
 
-template <class T>
-T PtrWalker<T>::fval() {
-  return *++head;
+TMPL(T, fval()) {
+  return *++p;
 }
 
-template <class T>
-T PtrWalker<T>::valb() {
-  return *head--;
+TMPL(T, valb()) {
+  return *p--;
 }
 
-template <class T>
-T PtrWalker<T>::bval() {
-  return *--head;
+TMPL(T, bval()) {
+  return *--p;
 }
 
-template <class T>
-void PtrWalker<T>::set(T value) {
-  *head = value;
+TMPL(void, set(T value)) {
+  *p = value;
 }
 
-template <class T>
-void PtrWalker<T>::setf(T value) {
-  *head++ = value;
+TMPL(void, setf(T value)) {
+  *p++ = value;
 }
 
-template <class T>
-void PtrWalker<T>::fset(T value) {
-  *++head = value;
+TMPL(void, fset(T value)) {
+  *++p = value;
 }
 
-template <class T>
-void PtrWalker<T>::setb(T value) {
-  *head-- = value;
+TMPL(void, setb(T value)) {
+  *p-- = value;
 }
 
-template <class T>
-void PtrWalker<T>::bset(T value) {
-  *--head = value;
+TMPL(void, bset(T value)) {
+  *--p = value;
 }
 
-template <class T>
-void PtrWalker<T>::operator++() {
-  ++head;
+TMPL(void, insert(T* value, int n)) {
+  memcpy(p, value, n); 
 }
 
-template <class T>
-void PtrWalker<T>::operator--() {
-  --head;
+TMPL(void, operator++()) {
+  ++p;
 }
 
-template <class T>
-void PtrWalker<T>::move(int distance) {
-  head += distance;
+TMPL(void, operator--()) {
+  --p;
 }
 
-template class PtrWalker<char>;
-template class PtrWalker<int>;
-template class PtrWalker<double>;
+TMPL(void, move(int distance)) {
+  p += distance;
+}
 
-// Below instances are only for RecurPtrWalker
-template class PtrWalker<char*>; 
+INST(char);
+INST(int);
+INST(double);
+
+// Instances below are only for RecurPtrWalker
+INST(char*); 

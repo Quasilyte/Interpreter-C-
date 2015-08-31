@@ -2,7 +2,7 @@
 
 #include <stdlib.h>
 
-int32_t toInt(char* v) {
+int32_t toInt(const char* v) {
   return atol(v);
 }
 

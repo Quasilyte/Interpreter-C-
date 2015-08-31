@@ -14,8 +14,8 @@ void Evaluator::eval(char* input, int len) {
   for (int i =  0; !byteCode->atEnd(); ++i) {
     switch (byteCode->valf()) {
     case ByteCode::T_INT:
-      printf("%d\n", intBytesToInt(byteCode->getHead()));
-      byteCode->move(4);
+      printf("%d\n", intBytesToInt(byteCode->head()));
+      byteCode->move(3);
       break;
     default:
       printf("skipping `%c'\n", byteCode->val());

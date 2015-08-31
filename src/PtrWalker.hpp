@@ -22,15 +22,15 @@
 template <class T> class PtrWalker {
 protected:
   int cap;
-  T* begin;
-  T* head;
+  T* mem;
+  T* p;
 
 public:
   PtrWalker(T* initializer, int initializerSize);
   PtrWalker(const int initialCap);
   ~PtrWalker();
   
-  // Reset `head' to the `begin'
+  // Reset `p' to the `mem'
   void rewind();
 
   // Current offset
@@ -39,27 +39,28 @@ public:
   // Increase buffer capacity by `cap * 2 - 1'
   void enlarge(const int offset);
 
-  // If returns true, then it is UB to move further.
+  // If returns true, then it is UB to move further
   bool atEnd() const;
 
-  T* getBegin() const;
-  T* getHead() const;
+  T* begin() const;
+  T* head() const;
   
-  // Dereferencing current (head) element
+  // Dereferencing current (p) element
   T val() const;
   T valf();
   T fval();
   T valb();
   T bval();
 
-  // Modifiying value which is pointed by a head
+  // Modifiying value which is pointed by `p'
   void set(T value);
   void setf(T value);
   void fset(T value);
   void setb(T value);
   void bset(T value);
+  void insert(T* value, int n);
 
-  // Move head back and forth
+  // Move `p' back and forth
   void operator++();
   void operator--();
   void move(int distance);
