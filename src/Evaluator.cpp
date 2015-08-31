@@ -1,11 +1,11 @@
-#include "Evaluator.hpp"
+#include "header/Evaluator.hpp"
 
 #include <string.h>
 #include <stdio.h>
 
-#include "Compiler.hpp"
-#include "ByteCode.hpp"
-#include "typeconv.hpp"
+#include "header/Compiler.hpp"
+#include "header/ByteCode.hpp"
+#include "header/typeconv.hpp"
 
 void Evaluator::eval(char* input, int len) {
   // byteCode = Compiler::toByteCode(input);

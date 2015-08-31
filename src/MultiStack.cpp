@@ -1,6 +1,6 @@
-#include "MultiStack.hpp"
+#include "header/MultiStack.hpp"
 
-#include "typeconv.hpp"
+#include "header/typeconv.hpp"
 
 #define CLASS_NAME MultiStack
 #include "util/class_codegen.hpp"

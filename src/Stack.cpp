@@ -1,7 +1,7 @@
-#include "Stack.hpp"
+#include "header/Stack.hpp"
 
-#include "PtrWalker.hpp"
-#include "RecurPtrWalker.hpp"
+#include "header/PtrWalker.hpp"
+#include "header/RecurPtrWalker.hpp"
 
 #define TMPL_ARGS class T, class Ptr
 #define TMPL_TYPENAMES T, Ptr

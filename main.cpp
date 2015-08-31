@@ -1,8 +1,8 @@
-#include "src/PtrWalker.hpp"
-#include "src/RecurPtrWalker.hpp"
-#include "src/ByteCode.hpp"
-#include "src/typeconv.hpp"
-#include "src/Evaluator.hpp"
+#include "src/header/PtrWalker.hpp"
+#include "src/header/RecurPtrWalker.hpp"
+#include "src/header/ByteCode.hpp"
+#include "src/header/typeconv.hpp"
+#include "src/header/Evaluator.hpp"
 
 #include <stdlib.h>
 #include <stdio.h>
