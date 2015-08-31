@@ -16,7 +16,7 @@
 int main() {
   
   char* str = (char*) malloc(40);
-  strcpy(str, "399 301");
+  strcpy(str, "399[301");
 
   Evaluator ev;
   ev.eval(str, strlen(str));

@@ -24,25 +24,38 @@ DEFN(void, parseNum()) {
 
 DEFN(void, parse()) {
   char c = *input;
+  printf("%c\n", c);
+
+  if (isdigit(c) || c == '-') {
+    parseNum();
+  } else {
+    char *s = (char*) malloc(4); strcpy(s, "111");
+    ByteCode::appendIntBytes(output, s);
+    ++input;
+  }
   
+  /*
   if (isdigit(c) || c == '-') {
     parseNum();
   } else if (c == '[') {
+    ++input; 
     // parseVec();
   } else if (c == '\'') {
     // parseStr();
   } else {
     char *s = (char*) malloc(4); strcpy(s, "111");
     ByteCode::appendIntBytes(output, s);
-    
+    ++input;
     // parseSym();
   }
+  */
 }
 
 DEFN(PtrWalker<unsigned char>*, toByteCode(char* text, size_t len)) {
   output = new PtrWalker<unsigned char>(len + len);
-
-  for (input = text; *input; ++input)
+  input = text;
+  
+  while(*input)
     parse();
 
   output->rewind();
