@@ -1,0 +1,6 @@
+#ifndef HEADERS_CONFIG_RUNTIME_
+#define HEADERS_CONFIG_RUNTIME_
+
+#define DATA_STACK_SIZE 4
+
+#endif

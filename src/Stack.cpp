@@ -1,12 +1,12 @@
-#include "header/Stack.hpp"
+#include "Stack.hpp"
 
-#include "header/PtrWalker.hpp"
-#include "header/RecurPtrWalker.hpp"
+#include "PtrWalker.hpp"
+#include "RecurPtrWalker.hpp"
 
 #define TMPL_ARGS class T, class Ptr
 #define TMPL_TYPENAMES T, Ptr
 #define CLASS_NAME Stack
-#include "util/class_codegen.hpp"
+#include "class_codegen.hpp"
 
 CTOR(int initialCap): elems(initialCap) {}
 

@@ -1,4 +1,4 @@
-#include "header/PtrWalker.hpp"
+#include "PtrWalker.hpp"
 
 #include <stdlib.h>
 #include <string.h>
@@ -7,7 +7,7 @@
 #define TMPL_ARGS class T
 #define TMPL_TYPENAMES T
 #define CLASS_NAME PtrWalker
-#include "util/class_codegen.hpp"
+#include "class_codegen.hpp"
 
 CTOR(T* initializer, int initializerSize) {
   this->cap = initializerSize;

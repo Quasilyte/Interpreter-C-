@@ -1,6 +1,7 @@
-#ifndef HEADER_BYTE_CODE_
-#define HEADER_BYTE_CODE_
+#ifndef HEADERS_BYTECODE_
+#define HEADERS_BYTECODE_
 
+#include "config/types.hpp"
 #include "PtrWalker.hpp"
 
 /**
@@ -21,7 +22,7 @@
 #define BC_ADD bcodeAdd__
 #define BC_SUB bcodeSub__
 
-namespace ByteCode {
+namespace bytecode {
   enum {
     BC_STOP = '\0', // Again, STOP must ALWAYS be 0
     // The order of others not matters
@@ -33,7 +34,7 @@ namespace ByteCode {
     BC_SUB
   };
 
-  void appendIntBytes(PtrWalker<unsigned char>* dest, char* cstr);
+  void appendIntBytes(PtrWalker<uchar>* dest, const char* cstr);
 }
 
 #endif

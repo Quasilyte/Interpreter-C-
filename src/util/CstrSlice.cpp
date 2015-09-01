@@ -1,4 +1,4 @@
-#include "CstrSlice.hpp"
+#include "util/CstrSlice.hpp"
 
 #define CLASS_NAME CstrSlice
 #include "class_codegen.hpp"

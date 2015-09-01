@@ -1,14 +1,14 @@
-#include "header/TypeConv.hpp"
+#include "typeconv.hpp"
 
 #include <stdlib.h>
 #include <stdio.h>
 
-namespace TypeConv {
-  int32_t toInt(char* v) {
-    return atoi(v);
+namespace typeconv {
+  inum toInum(const char* cstr) {
+    return atoi(cstr);
   }
 
-  char* toCstr(int32_t v) {
+  char* toCstr(inum v) {
     static char bag[10];
     static int i;
     static int j;
@@ -36,15 +36,15 @@ namespace TypeConv {
     return s;
   }
 
-  int32_t intBytesToInt(unsigned char* v) {
-    return static_cast<int32_t>(
+  inum inumBytesToInum(uchar* v) {
+    return static_cast<inum>(
       v[3] | (v[2] << 8) | (v[1] << 16) | (v[0] << 24)
     );
   }
 
-  unsigned char* cstrToIntBytes(char* s) {
-    int32_t v = toInt(s);
-    unsigned char* bytes = (unsigned char*) malloc(4);
+  uchar* cstrToInumBytes(const char* cstr) {
+    inum v = toInum(cstr);
+    uchar* bytes = (uchar*) malloc(4);
         
     bytes[0] = (v >> 24) & 0xFF;
     bytes[1] = (v >> 16) & 0xFF;
